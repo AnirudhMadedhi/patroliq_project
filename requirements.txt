@@ -4,5 +4,7 @@ scikit-learn
 matplotlib
 plotly
 streamlit
+folium
+streamlit-folium
 mlflow
 umap-learn

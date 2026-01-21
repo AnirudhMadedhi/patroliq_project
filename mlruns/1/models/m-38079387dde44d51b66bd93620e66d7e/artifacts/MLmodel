@@ -1,0 +1,22 @@
+artifact_path: file:C:/patroliq_project/mlruns/1/models/m-38079387dde44d51b66bd93620e66d7e/artifacts
+flavors:
+  python_function:
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.sklearn
+    model_path: model.pkl
+    predict_fn: predict
+    python_version: 3.13.7
+  sklearn:
+    code: null
+    pickled_model: model.pkl
+    serialization_format: cloudpickle
+    sklearn_version: 1.7.1
+mlflow_version: 3.8.1
+model_id: m-38079387dde44d51b66bd93620e66d7e
+model_size_bytes: 40682
+model_uuid: m-38079387dde44d51b66bd93620e66d7e
+prompts: null
+run_id: 1550bce223d6415d8daaa231871afd2a
+utc_time_created: '2026-01-21 06:13:38.325756'

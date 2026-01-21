@@ -1,0 +1,4 @@
+component,top_features
+PC1,"Temporal_Cluster, Month, Hour"
+PC2,"Longitude, Hour, District"
+PC3,"Beat, District, Ward"

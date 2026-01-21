@@ -143,6 +143,30 @@ with mlflow.start_run(run_name="Temporal_KMeans_Full"):
       .to_csv("temporal_crime_profiles.csv", index=False)
     mlflow.log_artifact("temporal_crime_profiles.csv")
 
+# # =================================================
+# # STEP 5 — PCA
+# # =================================================
+# NUMERIC_FEATURES = df.select_dtypes(include="number").columns
+# X_num = df[NUMERIC_FEATURES]
+
+# mlflow.set_experiment("PatrolIQ_PCA")
+
+# with mlflow.start_run(run_name="PCA"):
+#     pca, X_pca = run_pca(X_num, n_components=3)
+
+#     mlflow.log_metric("explained_variance", pca.explained_variance_ratio_.sum())
+
+#     pd.DataFrame(X_pca, columns=["PC1", "PC2", "PC3"]) \
+#       .to_csv("pca_transformed_data.csv", index=False)
+#     mlflow.log_artifact("pca_transformed_data.csv")
+
+#     pd.Series(abs(pca.components_[0]), index=NUMERIC_FEATURES) \
+#       .sort_values(ascending=False) \
+#       .to_csv("pca_feature_importance.csv")
+#     mlflow.log_artifact("pca_feature_importance.csv")
+
+#     mlflow.log_artifact("pca_variance.csv")
+#     mlflow.log_artifact("pca_top_features.csv")
 # =================================================
 # STEP 5 — PCA
 # =================================================
@@ -152,18 +176,28 @@ X_num = df[NUMERIC_FEATURES]
 mlflow.set_experiment("PatrolIQ_PCA")
 
 with mlflow.start_run(run_name="PCA"):
-    pca, X_pca = run_pca(X_num, n_components=3)
+    # PCA now retains ~75% variance automatically
+    pca, X_pca = run_pca(X_num, variance_threshold=0.75)
 
-    mlflow.log_metric("explained_variance", pca.explained_variance_ratio_.sum())
+    # Log total explained variance
+    mlflow.log_metric(
+        "explained_variance",
+        pca.explained_variance_ratio_.sum()
+    )
 
-    pd.DataFrame(X_pca, columns=["PC1", "PC2", "PC3"]) \
+    # Save PCA-transformed data with dynamic PC columns
+    pc_columns = [f"PC{i+1}" for i in range(X_pca.shape[1])]
+    pd.DataFrame(X_pca, columns=pc_columns) \
       .to_csv("pca_transformed_data.csv", index=False)
     mlflow.log_artifact("pca_transformed_data.csv")
 
-    pd.Series(abs(pca.components_[0]), index=NUMERIC_FEATURES) \
-      .sort_values(ascending=False) \
-      .to_csv("pca_feature_importance.csv")
+    # Log interpretability artifacts generated inside run_pca()
+    mlflow.log_artifact("pca_variance.csv")
     mlflow.log_artifact("pca_feature_importance.csv")
+    mlflow.log_artifact("pca_top_features.csv")
+
+
+mlflow.end_run()
 
 # =================================================
 # STEP 5 — UMAP

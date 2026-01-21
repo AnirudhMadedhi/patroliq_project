@@ -1,0 +1,8 @@
+component,top_features
+PC1,"Temporal_Cluster, Month, Hour"
+PC2,"Longitude, Hour, District"
+PC3,"Beat, District, Ward"
+PC4,"Latitude, DayOfWeek, Beat"
+PC5,"Ward, ID, DayOfWeek"
+PC6,"Hour, Latitude, DayOfWeek"
+PC7,"Beat, Hour, Longitude"

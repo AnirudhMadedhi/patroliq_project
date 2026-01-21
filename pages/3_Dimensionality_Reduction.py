@@ -13,7 +13,7 @@ PCA_VARIANCE_PATH = "pca_variance.csv"
 PCA_DATA_PATH = "pca_transformed_data.csv"
 UMAP_DATA_PATH = "umap_coordinates.csv"
 GEO_LABELS_PATH = "geo_kmeans_labels.npy"
-CRIME_DATA_PATH = "sample_data.csv"
+CRIME_DATA_PATH = "data/sample_data.csv"
 PCA_FEATURES_PATH = "pca_top_features.csv"
 
 # =================================================

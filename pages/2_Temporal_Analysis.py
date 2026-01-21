@@ -1,32 +1,19 @@
 import streamlit as st
-from mlflow_utils import load_latest_artifact
+import pandas as pd
 
 st.title("⏰ Temporal Crime Pattern Analysis")
 
-summary = load_latest_artifact(
-    "PatrolIQ_Temporal_Clustering",
-    "Temporal_KMeans_Full",
-    "temporal_cluster_summary.csv"
-)
+# -------------------------------------------------
+# Load pre-generated temporal analysis artifacts
+# -------------------------------------------------
+summary = pd.read_csv("temporal_cluster_summary.csv")
+peak_hours = pd.read_csv("peak_crime_hours.csv")
+peak_months = pd.read_csv("peak_crime_months.csv")
+profiles = pd.read_csv("temporal_crime_profiles.csv")
 
-peak_hours = load_latest_artifact(
-    "PatrolIQ_Temporal_Clustering",
-    "Temporal_KMeans_Full",
-    "peak_crime_hours.csv"
-)
-
-peak_months = load_latest_artifact(
-    "PatrolIQ_Temporal_Clustering",
-    "Temporal_KMeans_Full",
-    "peak_crime_months.csv"
-)
-
-profiles = load_latest_artifact(
-    "PatrolIQ_Temporal_Clustering",
-    "Temporal_KMeans_Full",
-    "temporal_crime_profiles.csv"
-)
-
+# -------------------------------------------------
+# Display results
+# -------------------------------------------------
 st.subheader("Temporal Cluster Behavior Summary")
 st.dataframe(summary)
 
